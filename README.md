@@ -11,7 +11,7 @@ como Clean Architecture, Dependency Injection, manejo de contratos (interfaces) 
 servicios, repositorios, configuraciones y mappers, se expone solo la información
 necesaria para el front y se oculta los detalles de implementación.
 
-Los servicios incluidos son:
+## Los servicios incluidos son:
 
 - Crear un Doctor
 - Actualizar un Doctor
@@ -35,7 +35,13 @@ Los servicios incluidos son:
 - Subir un archivo al servidor
 - Listar archivos subidos al servidor
 
-El estado del frontend:
+Al ejecutar el proyecto por ejemplo en el puerto 8080, se puede acceder a la documentación de los servicios en la siguiente URL:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+## El estado del frontend:
 
 - Listado de Doctores
 - Listado de Pacientes
