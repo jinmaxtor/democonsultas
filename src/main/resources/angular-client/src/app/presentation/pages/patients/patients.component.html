@@ -1,0 +1,66 @@
+<div class="app-content-header"> <!--begin::Container-->
+    <div class="container-fluid"> <!--begin::Row-->
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="mb-0">Listado de Pacientes</h3>
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="app-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Seleccione un Paciente</h3>
+                        <div class="card-tools">
+
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Nacimiento</th>
+                                <th>Cantidad de Consultas</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @for (patient of patients; track patient.id; let i = $index) {
+                                    <tr class="align-middle">
+                                        <td>{{ patient.id }}</td>
+                                        <td>{{ patient.fullName }}</td>
+                                        <td>{{ patient.address }}</td>
+                                        <td>{{ patient.birthDate | date:"dd/MM/yyyy" }}</td>
+                                        <td>{{ patient.medicalConsultations.length }}</td>
+                                        <td>
+                                            <button type="button" routerLink="/patients/{{patient.id}}/medical-consultations"
+                                                    class="btn btn-primary mb-2">
+                                                <i class="bi bi-clipboard2-pulse"></i>
+                                            </button>
+                                            <button type="button"  routerLink="{{patient.id}}"
+                                                    class="btn btn-secondary mb-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger mb-2">
+                                                <i class="bi bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

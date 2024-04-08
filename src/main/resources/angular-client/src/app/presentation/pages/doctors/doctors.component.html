@@ -1,0 +1,95 @@
+<div class="app-content-header"> <!--begin::Container-->
+    <div class="container-fluid"> <!--begin::Row-->
+        <div class="row">
+            <div class="col-sm-9">
+                <h3 class="mb-0">Listado de Doctores</h3>
+            </div>
+            <div class="col-sm-3">
+                <div class="container-fluid float-end">
+                    <div class="d-flex" role="search">
+                        <input class="form-control me-2" [(ngModel)]="pageRequest.name"
+                               type="search" placeholder="Nombre"
+                               aria-label="Nombre">
+                        <button class="btn btn-outline-success" (click)="loadDoctors()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="app-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Seleccione un Doctor</h3>
+                        <div class="card-tools">
+                            <ul class="pagination pagination-sm float-end">
+                                <li class="page-item"><a class="page-link" (click)="loadPreviousPage()">&laquo;</a>
+                                </li>
+
+                                @for (page of pageSecuence; track page; let i = $index) {
+                                    <li class="page-item">
+                                        <a class="page-link {{getActivePage(page + 1)}}"
+                                           (click)="loadPageParameter(page + 1)">
+                                            {{ page + 1 }}
+                                        </a>
+                                    </li>
+                                }
+
+                                <li class="page-item"><a class="page-link"
+                                                         (click)="loadNextPage()">&raquo;</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Nombre</th>
+                                <th>Especialidad</th>
+                                <th>Dirección</th>
+                                <th>Nacimiento</th>
+                                <th>Cantidad de Consultas</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @for (doctor of doctors.content; track doctor.id; let i = $index) {
+                                    <tr class="align-middle">
+                                        <td>{{ doctor.id }}</td>
+                                        <td>{{ doctor.fullName }}</td>
+                                        <td>{{ doctor.specialty }}</td>
+                                        <td>{{ doctor.address }}</td>
+                                        <td>{{ doctor.birthDate | date:"dd/MM/yyyy" }}</td>
+                                        <td>{{ doctor.medicalConsultations.length }}</td>
+                                        <td>
+                                            <button type="button" routerLink="{{doctor.id}}/medical-consultations"
+                                                    class="btn btn-primary mb-2">
+                                                <i class="bi bi-clipboard2-pulse"></i>
+                                            </button>
+                                            <button type="button" routerLink="{{doctor.id}}/patients"
+                                                    class="btn btn-primary mb-2">
+                                                <i class="bi bi-person-vcard"></i>
+                                            </button>
+                                            <button type="button" routerLink="{{doctor.id}}"
+                                                    class="btn btn-secondary mb-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger mb-2">
+                                                <i class="bi bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
