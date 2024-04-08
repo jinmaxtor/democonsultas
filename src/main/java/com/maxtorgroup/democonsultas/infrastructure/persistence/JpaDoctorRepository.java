@@ -2,9 +2,12 @@ package com.maxtorgroup.democonsultas.infrastructure.persistence;
 
 import com.maxtorgroup.democonsultas.domain.contract.DoctorRepository;
 import com.maxtorgroup.democonsultas.infrastructure.entity.Doctor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Sort;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +26,24 @@ public class JpaDoctorRepository implements DoctorRepository {
     @Override
     public List<Doctor> getDoctors() {
         return dataRepository.findAll();
+    }
+
+    private static Specification<Doctor> nameContains(String name) {
+        if (name == null || name.isEmpty()) {
+            return null;
+        }
+
+        String nameLike = "%" + name + "%";
+        return (Root<Doctor> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
+            Predicate namePredicate = builder.like(root.get("firstName").as(String.class), nameLike);
+            Predicate lastNamePredicate = builder.like(root.get("lastName").as(String.class), nameLike);
+            return builder.or(namePredicate, lastNamePredicate);
+        };
+    }
+
+    @Override
+    public Page<Doctor> getPageableDoctorsByName(String name, Pageable pageable) {
+        return dataRepository.findAll(nameContains(name), pageable);
     }
 
     @Override

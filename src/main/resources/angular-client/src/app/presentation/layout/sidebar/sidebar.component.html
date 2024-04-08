@@ -1,0 +1,33 @@
+<div class="sidebar-brand">
+    <a href="/" class="brand-link">
+        <i class="bi bi-capsule"></i>
+        <span class="brand-text fw-light">Demo Medico</span>
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <nav class="mt-2">
+        <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                    <i class="bi bi-hospital"></i>
+                    <p>Casos de Uso <i class="nav-arrow bi bi-chevron-right"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a routerLink="doctors" class="nav-link"
+                           routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Doctores</p>
+                        </a></li>
+                    <li class="nav-item">
+                        <a routerLink="patients" class="nav-link"
+                           routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Pacientes</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

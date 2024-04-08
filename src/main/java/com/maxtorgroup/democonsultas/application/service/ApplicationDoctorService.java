@@ -3,10 +3,7 @@ package com.maxtorgroup.democonsultas.application.service;
 import com.maxtorgroup.democonsultas.domain.contract.DoctorRepository;
 import com.maxtorgroup.democonsultas.domain.contract.DoctorService;
 import com.maxtorgroup.democonsultas.domain.contract.MedicalConsultationRepository;
-import com.maxtorgroup.democonsultas.domain.dto.DoctorDto;
-import com.maxtorgroup.democonsultas.domain.dto.DoctorRegisterDto;
-import com.maxtorgroup.democonsultas.domain.dto.MedicalConsultationDto;
-import com.maxtorgroup.democonsultas.domain.dto.MedicalConsultationRegisterDto;
+import com.maxtorgroup.democonsultas.domain.dto.*;
 import com.maxtorgroup.democonsultas.infrastructure.entity.Doctor;
 import com.maxtorgroup.democonsultas.infrastructure.entity.MedicalConsultation;
 import com.maxtorgroup.democonsultas.infrastructure.mapper.EntityMapper;
@@ -31,6 +28,11 @@ public class ApplicationDoctorService implements DoctorService {
     @Override
     public List<DoctorDto> getDoctors() {
         return mapper.doctorsToDto(doctorRepository.getDoctors());
+    }
+
+    @Override
+    public PageDto<DoctorDto> getPageableDoctorsByName(PageRequestDto pageRequest) {
+        return mapper.pagedDoctorsToDto(doctorRepository.getPageableDoctorsByName(pageRequest.getName(), mapper.toPageable(pageRequest)));
     }
 
     @Override
@@ -82,8 +84,7 @@ public class ApplicationDoctorService implements DoctorService {
 
     @Override
     public Boolean deleteMedicalConsultation(Long id) {
-        medicalConsultationRepository.deleteMedicalConsultationById(id);
-        return true;
+        return medicalConsultationRepository.deleteMedicalConsultationById(id);
     }
 
     private void validateDoctor(DoctorRegisterDto doctor) {

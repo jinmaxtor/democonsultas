@@ -1,13 +1,54 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>AngularClient</title>
+  <title>Ejemplo bla</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="title" content="Titulo bla">
+  <meta name="author" content="Yimmy Quispe Yujra">
+  <meta name="description" content="Ejemplo consultas medicas">
+  <meta name="keywords" content="pruebas, bla, cosas">
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+
 </head>
-<body>
-  <app-root></app-root>
+<body class="layout-fixed-complete sidebar-expand-lg bg-body-tertiary">
+<div app-root class="app-wrapper"></div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+<script>
+  const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+  const Default = {
+    scrollbarTheme: "os-theme-light",
+    scrollbarAutoHide: "leave",
+    scrollbarClickScroll: true,
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+    if (
+      sidebarWrapper &&
+      typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+    ) {
+      OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+        scrollbars: {
+          theme: Default.scrollbarTheme,
+          autoHide: Default.scrollbarAutoHide,
+          clickScroll: Default.scrollbarClickScroll,
+        },
+      });
+    }
+  });
+</script>
 </body>
 </html>
+
+

@@ -1,6 +1,7 @@
 package com.maxtorgroup.democonsultas.api.controller;
 
 import com.maxtorgroup.democonsultas.domain.contract.PatientService;
+import com.maxtorgroup.democonsultas.domain.dto.MedicalConsultationDto;
 import com.maxtorgroup.democonsultas.domain.dto.PatientDto;
 import com.maxtorgroup.democonsultas.domain.dto.PatientRegisterDto;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/patient")
+@RequestMapping("/api/patients")
 public class PatientController {
 
     private final PatientService patientService;
@@ -42,5 +43,10 @@ public class PatientController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deletePatient(@PathVariable Long id) {
         return new ResponseEntity<>(patientService.deletePatient(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/medical-consultations")
+    public ResponseEntity<List<MedicalConsultationDto>> getMedicalConsultations(@PathVariable Long id) {
+        return new ResponseEntity<>(patientService.getMedicalConsultations(id), HttpStatus.OK);
     }
 }

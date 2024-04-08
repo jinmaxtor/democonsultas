@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/file")
+@RequestMapping("/api/files")
 public class FileController {
 
     private final FileService fileService;

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface PatientRepository {
     List<Patient> getPatients();
+    List<Patient> getPatientsByDoctorId(Long doctorId);
     Optional<Patient> getPatientById(Long id);
     Optional<Patient> getPatientByEmail(String email);
     Patient savePatient(Patient patient);

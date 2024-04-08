@@ -21,8 +21,9 @@ public class ServiceConfiguration {
     @Bean
     PatientService patientService(
             final EntityMapper mapper,
-            final PatientRepository patientRepository) {
-        return new ApplicationPatientService(mapper, patientRepository);
+            final PatientRepository patientRepository,
+            final MedicalConsultationRepository medicalConsultationRepository) {
+        return new ApplicationPatientService(mapper, patientRepository, medicalConsultationRepository);
     }
 
     @Bean

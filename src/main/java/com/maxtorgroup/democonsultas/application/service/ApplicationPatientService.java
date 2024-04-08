@@ -1,7 +1,9 @@
 package com.maxtorgroup.democonsultas.application.service;
 
+import com.maxtorgroup.democonsultas.domain.contract.MedicalConsultationRepository;
 import com.maxtorgroup.democonsultas.domain.contract.PatientRepository;
 import com.maxtorgroup.democonsultas.domain.contract.PatientService;
+import com.maxtorgroup.democonsultas.domain.dto.MedicalConsultationDto;
 import com.maxtorgroup.democonsultas.domain.dto.PatientDto;
 import com.maxtorgroup.democonsultas.domain.dto.PatientRegisterDto;
 import com.maxtorgroup.democonsultas.infrastructure.entity.Patient;
@@ -13,15 +15,25 @@ public class ApplicationPatientService implements PatientService {
 
     private final EntityMapper mapper;
     private final PatientRepository patientRepository;
+    private final MedicalConsultationRepository medicalConsultationRepository;
 
-    public ApplicationPatientService(EntityMapper mapper, PatientRepository patientRepository) {
+    public ApplicationPatientService(
+            EntityMapper mapper,
+            PatientRepository patientRepository,
+            MedicalConsultationRepository medicalConsultationRepository) {
         this.mapper = mapper;
         this.patientRepository = patientRepository;
+        this.medicalConsultationRepository = medicalConsultationRepository;
     }
 
     @Override
     public List<PatientDto> getPatients() {
         return mapper.patientsToDto(patientRepository.getPatients());
+    }
+
+    @Override
+    public List<PatientDto> getPatientsByDoctorId(Long doctorId) {
+        return mapper.patientsToDto(patientRepository.getPatientsByDoctorId(doctorId));
     }
 
     @Override
@@ -49,6 +61,11 @@ public class ApplicationPatientService implements PatientService {
     @Override
     public Boolean deletePatient(Long id) {
         return patientRepository.deletePatientById(id);
+    }
+
+    @Override
+    public List<MedicalConsultationDto> getMedicalConsultations(Long patientId) {
+        return mapper.medicalConsultationsToDto(medicalConsultationRepository.getMedicalConsultationsByPatientId(patientId));
     }
 
     private void validateExistingPatientById(Long id) {
